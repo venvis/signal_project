@@ -1,0 +1,23 @@
+@startuml PatientIdentificationSystem
+
+class PatientIdentifier {
+    + matchPatientID(dataID)
+    + linkData(patientID, dataID)
+    + resolveDiscrepancy(dataID)
+}
+
+class PatientRecord {
+    - patientID: String
+    - personalDetails: Map<String, Object>
+    - medicalHistory: List<String>
+}
+
+class IdentityManager {
+    + verifyPatientID(dataID)
+    + handleAnomalies()
+}
+
+PatientIdentifier --> PatientRecord
+PatientIdentifier --> IdentityManager
+
+@enduml

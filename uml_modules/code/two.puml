@@ -1,0 +1,25 @@
+@startuml DataStorageSystem
+
+class DataStorage {
+    + storeData(data)
+    + retrieveData(patientID)
+    + deleteData(patientID)
+}
+
+class PatientData {
+    - patientID: String
+    - vitalSigns: Map<String, Object>
+    - medicalHistory: List<String>
+    - timestamp: Date
+}
+
+class DataRetriever {
+    + queryData(patientID)
+    + fetchData(patientID)
+    + authenticate(user, password)
+}
+
+DataStorage --> PatientData
+DataStorage --> DataRetriever
+
+@enduml

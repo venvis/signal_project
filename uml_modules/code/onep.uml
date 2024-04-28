@@ -1,0 +1,22 @@
+@startuml
+
+title Alert Generation System - Sequence Diagram
+
+actor Patient
+participant HeartRateMonitor
+participant AlertGenerator
+participant DataStorage
+participant Alert
+participant Nurse
+
+Patient -> HeartRateMonitor : Exceeds threshold
+HeartRateMonitor -> AlertGenerator : Send heart rate data
+AlertGenerator -> DataStorage : Check patient data
+DataStorage --> AlertGenerator : Patient data retrieved
+AlertGenerator -> Alert : Generate alert
+Alert -> Nurse : Alert sent to nurse
+Nurse -> Alert : Acknowledge alert
+Alert -> DataStorage : Alert resolved
+DataStorage -> AlertGenerator : Confirm alert resolution
+
+@enduml

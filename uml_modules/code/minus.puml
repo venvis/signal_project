@@ -1,0 +1,73 @@
+ @startuml
+
+class AlertGenerator {
+    + receiveData(data: Data): void
+}
+
+class Alert {
+    - patientID: int
+    - timestamp: Date
+    - alertType: String
+    - message: String
+    + displayAlert(): void
+}
+
+class AlertManager {
+    + sendAlert(alert: Alert): void
+}
+
+class DataStorage {
+    - data: Map<String, Object>
+    + storeData(key: String, value: Object): void
+    + retrieveData(key: String): Object
+    + deleteData(key: String): void
+}
+
+class PatientData {
+    - patientID: int
+    - medicalHistory: List
+}
+
+class DataRetriever {
+    + queryData(criteria: String): Object
+}
+
+class PatientIdentifier {
+    + identifyPatient(data: Data): int
+}
+
+class PatientRecord {
+    - patientID: int
+    - firstName: String
+    - lastName: String
+    - dateOfBirth: Date
+}
+
+class IdentityManager {
+    + verifyIdentity(patientID: int): boolean
+}
+
+class DataListener {
+    + listen(data: Data): void
+}
+
+class DataParser {
+    + parseData(data: Data): ParsedData
+}
+
+class DataSourceAdapter {
+    + adaptData(parsedData: ParsedData): void
+}
+
+AlertGenerator -- Alert
+AlertManager -- Alert
+AlertManager -- DataStorage
+DataRetriever -- DataStorage
+DataStorage -- PatientData
+PatientIdentifier -- PatientRecord
+IdentityManager -- PatientRecord
+DataListener -- DataStorage
+DataParser -- DataListener
+DataSourceAdapter -- DataParser
+
+@enduml

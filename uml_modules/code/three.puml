@@ -1,0 +1,30 @@
+@startuml AlertGenerationSystem
+
+class AlertGenerator {
+    + receiveDataStream()
+    + processData(data)
+    + compareThresholds(data)
+    + instantiateAlert(data)
+}
+
+class AlertManager {
+    + sendAlertToMobile(alert)
+    + sendAlertToWorkstation(alert)
+    + manageAlert(alert)
+}
+
+class Alert {
+    - patientID: String
+    - alertType: String
+    - timestamp: Date
+}
+
+class HeartRate
+class BloodPressure
+
+AlertGenerator --> HeartRate
+AlertGenerator --> BloodPressure
+AlertGenerator --> Alert
+AlertManager --> Alert
+
+@enduml
