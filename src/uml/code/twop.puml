@@ -1,0 +1,24 @@
+@startuml
+
+title Alert Generation System - State Diagram
+
+[*] --> Generated
+
+state Generated {
+  [*] --> Monitoring
+  Monitoring --> ThresholdCheck : Patient data received
+  ThresholdCheck --> AlertGenerated : Data meets threshold
+  AlertGenerated --> Sent : Alert generated
+}
+
+state Sent {
+  Sent --> Acknowledged : Alert sent to medical staff
+  Acknowledged --> Resolved : Alert acknowledged
+  Resolved --> [*] : Alert resolved
+}
+
+state Resolved {
+  Resolved --> Generated : Alert can be generated again
+}
+
+@enduml

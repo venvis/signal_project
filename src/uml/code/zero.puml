@@ -1,0 +1,40 @@
+@startuml DataAccessLayer
+
+abstract class DataListener {
+    + receiveData(data: String)
+}
+
+class TCPDataListener {
+    + receiveData(data: String)
+}
+
+class WebSocketDataListener {
+    + receiveData(data: String)
+}
+
+class FileDataListener {
+    + receiveData(data: String)
+}
+
+abstract class DataParser {
+    + parseData(data: String): Map<String, Object>
+}
+
+class StandardDataParser {
+    + parseData(data: String): Map<String, Object>
+}
+
+class DataSourceAdapter {
+    + processData(parsedData: Map<String, Object>)
+}
+
+DataListener <|-- TCPDataListener
+DataListener <|-- WebSocketDataListener
+DataListener <|-- FileDataListener
+
+DataParser <|-- StandardDataParser
+
+DataListener --> DataParser
+DataParser --> DataSourceAdapter
+
+@enduml
